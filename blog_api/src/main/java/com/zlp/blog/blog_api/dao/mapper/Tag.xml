@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.zlp.blog.blog_api.dao.TagMapper">
+    <!--List<Tag> findTagsByArticleID(long articleId);-->
+    <select id="findTagsByArticleID" resultType="Tag">
+        select * from ms_tag
+        where id in (select tag_id from ms_article_tag where article_id=#{articleId})
+    </select>
+
+    <!--Result findHotTags(int limit);-->
+    <select id="findHotTags" parameterType="int" resultType="Tag">
+        select * from ms_tag
+        where id in
+        (select id from
+            (select tag_id as id from ms_article_tag
+            group by tag_id
+            ORDER BY count(tag_id) desc
+            limit #{limit}) as t
+        )
+    </select>
+
+    <!--List<Tag> findTagALL();-->
+    <select id="findTagALL" resultType="tag">
+        select * from ms_tag
+    </select>
+    <!--Tag findTagById(long id);-->
+    <select id="findTagById" resultType="tag" parameterType="long">
+        select * from ms_tag where id = #{id}
+    </select>
+</mapper>

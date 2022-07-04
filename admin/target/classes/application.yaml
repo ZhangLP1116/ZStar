@@ -1,0 +1,25 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    username: root
+    password: zlp123
+    url: jdbc:mysql://localhost:3306/zStar?serverTimezone=UTC&characterEncoding=utf8&useSSL=false&useUnicode=true
+  servlet:
+    multipart:
+      max-request-size: 100MB
+      max-file-size: 10MB
+
+
+mybatis:
+  mapper-locations: classpath*:com/zlp/blog/admin/dao/mapper/*.xml
+  type-aliases-package: com.zlp.blog.admin.dao.pojo
+  configuration:
+   # log-impl: org.apache.ibatis.logging.log4j2.Log4j2Impl
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+
+
+
+
+
+

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.zlp.blog.admin.dao.PermissionMapper">
+
+    <!--List<Permission> findPermissionList(long start, Integer pageSize);-->
+    <select id="findPermissionList" resultType="permission">
+        select * from ms_permission limit #{start},#{pageSize}
+    </select>
+
+    <!--List<Permission> findPermissionListByName(@Param("start") long start,@Param("pageSize") Integer pageSize,@Param("queryString") String queryString);-->
+    <select id="findPermissionListByName" resultType="permission">
+        select * from ms_permission
+        where name = #{queryString}
+        limit #{start},#{pageSize}
+    </select>
+
+    <!--long count();-->
+    <select id="count" resultType="long">
+        select count(*) from ms_permission
+    </select>
+
+    <!--void add(Permission permission);-->
+    <insert id="add" parameterType="permission">
+        insert ms_permission(name,path,description)
+        values (#{name},#{path},#{description})
+    </insert>
+
+    <!--void update(Permission permission);-->
+    <update id="update" parameterType="permission">
+        update ms_permission
+        set
+        name = #{name},
+        path = #{path},
+        description = #{description}
+        where id = #{id}
+    </update>
+
+    <!--void delete(long id);-->
+    <delete id="delete" parameterType="long">
+        delete from ms_permission where id = #{id}
+    </delete>
+
+    <!--List<Permission> findListByAdminId(long id);-->
+    <select id="findListByAdminId" resultType="permission">
+        select * from ms_permission where id in
+        (select permission_id from ms_admin_permission where admin_id = #{id})
+    </select>
+</mapper>

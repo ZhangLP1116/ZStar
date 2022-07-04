@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.zlp.blog.blog_api.dao.ArticleBodyMapper">
+    <!--ArticleBody findArticleBodyById(long id);-->
+    <select id="findArticleBodyById" resultType="articleBody" parameterType="long">
+        select * from ms_article_body
+        where id=#{id}
+    </select>
+
+    <!--void insert(ArticleBody articleBody);-->
+    <insert id="insert" parameterType="articleBody" useGeneratedKeys="true" keyProperty="id">
+        insert ms_article_body(content,content_html,article_id)
+        values (#{content},#{content_html},#{article_id})
+    </insert>
+</mapper>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.zlp.blog.blog_api.dao.ArticleTagMapper">
+    <!--void insert(ArticleTag articleTag);-->
+    <insert id="insert" parameterType="articleTag">
+        insert ms_article_tag(article_id,tag_id)
+        values (#{article_id},#{tag_id})
+    </insert>
+
+    <!--List<Long> findArticleIdListByTagId(long id);-->
+    <select id="findArticleIdListByTagId" parameterType="long" resultType="long">
+        select article_id from ms_article_tag where tag_id = #{id}
+    </select>
+</mapper>

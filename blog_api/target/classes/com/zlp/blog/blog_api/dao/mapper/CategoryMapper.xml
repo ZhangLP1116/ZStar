@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.zlp.blog.blog_api.dao.CategoryMapper">
+    <!--Category findCategoryById(long id);-->
+    <select id="findCategoryById" parameterType="long" resultType="category">
+        select * from ms_category
+        where id = #{id}
+        limit 1
+    </select>
+    <!--List<Category> findCategoryAll();-->
+    <select id="findCategoryAll" resultType="category">
+        select * from ms_category
+    </select>
+</mapper>
